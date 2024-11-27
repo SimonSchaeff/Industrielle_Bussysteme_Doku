@@ -1,0 +1,62 @@
+# Dateiendungen zum Ignorieren
+*.log
+*.aux
+*.tmp
+*.bak
+*.dvi
+*.blg
+*.bbl
+*.synctex.gz
+*~
+*.backup
+*.idx
+*.ind
+*.ilg
+*.fdb_latexmk
+*.fls
+*.xml
+*.gz
+*.ps
+*.nlo
+*.bcf
+*.nls
+
+
+
+
+# Dateien, die Informationen zu Labels und Verzeichnissen enthalten
+*.toc   # Table of contents
+*.lof   # List of figures
+*.lot   # List of tables
+*.out   # Weitere Hilfsdateien (z.B. hyperref Informationen)
+*.nav   # Navigation für Beamer-Präsentationen
+*.snm   # Informationen für Beamer-Präsentationen
+
+# Ignoriere alle entsprechenden Dateien in jedem Unterverzeichnis
+latex_doku_master/**/*.log
+latex_doku_master/**/*.aux
+latex_doku_master/**/*.tmp
+latex_doku_master/**/*.bak
+latex_doku_master/**/*.dvi
+latex_doku_master/**/*.blg
+latex_doku_master/**/*.bbl
+latex_doku_master/**/*.synctex.gz
+latex_doku_master/**/*~
+latex_doku_master/**/*.backup
+latex_doku_master/**/*.idx
+latex_doku_master/**/*.ind
+latex_doku_master/**/*.ilg
+latex_doku_master/**/*.fdb_latexmk
+latex_doku_master/**/*.fls
+latex_doku_master/**/*.xml
+latex_doku_master/**/*.gz
+latex_doku_master/**/*.ps
+latex_doku_master/**/*.nlo
+latex_doku_master/**/*.toc
+latex_doku_master/**/*.lof
+latex_doku_master/**/*.lot
+latex_doku_master/**/*.out
+latex_doku_master/**/*.nav
+latex_doku_master/**/*.snm
+latex_doku_master/**/*.bcf
+latex_doku_master/**/*.nls

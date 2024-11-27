@@ -1,0 +1,470 @@
+% Präambel
+\documentclass[%
+fontsize=12pt,					% Schriftgröße
+paper=a4,						% Papierformat
+twoside=false, 					% einseitiges (oneside) oder zweiseitiges (twoside) Dokument
+listof=totoc, 					% Tabellen- und Abbildungsverzeichnis ins Inhaltsverzeichnis
+bibliography=totoc,				% Literaturverzeichnis ins Inhaltsverzeichnis aufnehmen
+titlepage, 						% Titlepage-Umgebung statt \maketitle
+headsepline, 					% horizontale Linie unter Kolumnentitel
+%abstracton,					% Überschrift beim Abstract einschalten, Abstract muss dazu in {abstract}-Umgebung stehen
+DIV=12,							% Satzspiegeleinstellung, 12 ist Standar bei KOMA
+%BCOR=6mm,						% Bindekorrektur, die den Seitenspiegel um 6mm nach rechts verschiebt,
+cleardoublepage=empty,			% Stil einer leeren eingefügten Seite bei Kapitelwechsel
+parskip,							% Absatzabstand bei Absatzwechsel einfügen
+ngerman
+]{scrbook}			
+\usepackage[setspace=false]{scrhack}
+\usepackage[utf8]{inputenc} 	% ermöglicht die direkte Eingabe von Umlauten
+\usepackage[T1]{fontenc} 		% Ausgabe aller zeichen in einer T1-Codierung (wichtig für die Ausgabe von Umlauten!)
+\usepackage{babel} 	% deutsche Trennungsregeln und Übersetzung der festcodierten Überschriften
+\setlength{\parindent}{0ex} 	% bei neuem Abschnitt nicht einrücken
+%------
+% Folgende Einstellungen entsprechen den Vorgaben der Leitlinien
+\usepackage[onehalfspacing]{setspace}
+% Ende Leitlinien
+%------
+%------
+% Folgende Einstellungen sind bei größeren Arbeiten mit viel Text zu empfehlen.
+% Hierbei oben DIV=16 einstellen und Zeile \usepackage[onehalfspacing]{setspace} auskommentieren.
+%\linespread{1.2}\selectfont     % Zeilenabstand erhöhen - größere Werte als 1.2 nicht verwenden!!
+% Ende Einstellung große Arbeiten mit viel Text.
+%------------------------------------------------------------------------------------
+\usepackage{comment}			% mir    % zum blockweisen auskommentieren
+%------------------------------------------------------------------------------------
+% Tabellenpackete
+\usepackage{tabularx}			% mir    % Zum erstellen von Tabellen, die ihre Größe anpassen
+\usepackage{longtable}			% mir	 % Tabellen über mehrere Seiten möglich
+\usepackage{adjustbox}			% mir
+\usepackage{array}				% mir
+
+%------------------------------------------------------------------------------------
+% PDF Layout
+\usepackage{geometry}			% mir
+%------------------------------------------------------------------------------------
+% Zum ermöglichen, dass Dinge ganz am Schluss manuell platziert werden
+\usepackage{afterpage}			% mir
+%------------------------------------------------------------------------------------
+\usepackage{siunitx}			% Vereinfachte Eingabe von Einheiten in Formeln
+\sisetup{
+	number-unit-product = \;,
+	inter-unit-product = \:,
+	exponent-product = \cdot,
+	output-decimal-marker = {,}
+}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{graphicx}  			% Einbinden von Grafiken erlauben
+\usepackage[format=hang,		% Formatierungen von Unter- / Überschriften
+font=normal,
+labelfont=bf,
+justification=RaggedRight,
+singlelinecheck=true,
+aboveskip=1mm
+]{caption}
+% ------------------------------------------------------------------------------------------
+% GANTT-CHART-Diagramm Spezifisches:
+\usepackage{pgfgantt}
+\definecolor{barblue}{RGB}{153,204,254}
+\definecolor{groupblue}{RGB}{51,102,254}
+\definecolor{linkred}{RGB}{165,0,33}
+\definecolor{absentcolor}{RGB}{0,200,200}
+\setganttlinklabel{s-s}{START-ZU-START}
+\setganttlinklabel{f-s}{ENDE-ZU-START}
+\setganttlinklabel{f-f}{ENDE-ZU-ENDE}
+% ------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------
+%%%%Literatureinbindung mit Biber
+
+\usepackage[backend=biber, %% Hilfsprogramm "biber" beim Compilieren nutzen (statt "biblatex" oder "bibtex")
+style=numeric, %% Zitierstil (siehe Dokumentation) alternativ "alphabetic" bei Zitirschlüssel
+natbib=true, %% Bereitstellen von natbib-kompatiblen Zitierkommandos
+hyperref=true, %% hyperref-Paket verwenden, um Links zu erstellen
+sorting=none, %% Zitate in der Reihenfolge ihres Auftretens im Text anzeigen (Eingefügt 18.04.24)
+]{biblatex}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+
+
+% \addbibresource{literature/literatur1.bib} %% Einbinden der bib-Datei. Endung .bib unbedingt ergänzen
+%\addbibresource{literature/literatur2.bib} %% Einbinden mehrerer bib-Dateien mit zusätzlichem \addbibresource - Befehl----------------------beiden oberen aus Vorlage
+
+% ------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------
+\usepackage{csquotes}
+
+% Neue Zeilen hinzufügen, um das Zugriffsdatum anzuzeigen
+\DeclareLabeldate{				% von mir
+	\field{urldate}				% von mir
+}								% von mir
+
+% Folgende Zeilen sind auszukommentieren, falls runde Klammern und ein vgl. bei Zitaten erscheinen sollen.
+%\makeatletter
+%\renewcommand{\@cite}[2]{(vgl. {#1\if@tempswa , #2\fi})} 
+%\renewcommand{\@biblabel}[1]{(#1)}
+%\makeatother
+
+\usepackage{pdfpages}
+
+\usepackage{enumitem}			% Erlaubt Änderung der Nummerierung in der Umgebung enumerate
+
+\usepackage{amsmath}			% Ergänzungen für Formeln
+\usepackage{textcomp} 			% zum Einsatz von Eurozeichen u. a. Symbolen
+\usepackage{eurosym}			% bessere Darstellung Euro-Symbol mit \euro
+
+\usepackage[					% Einstellunge Paket hyperref
+hyperfootnotes=false,			% im pfd-Output Fußnoten nicht verlinken
+hidelinks						% Entfernen von farbigen Umrandungen der Links
+]{hyperref}
+
+\usepackage{makeidx}			% Paket zur Erstellung eines Index
+\usepackage[intoc]{nomencl} 	% zur Erstellung des Abkürzungsberzeichnisses
+
+\usepackage[					% Einstellungen für Fußnoten
+bottom,							% Ausrichtung unten
+multiple,						% Trennung durch Seperator bei mehreren Fußnoten
+hang,
+marginal
+]{footmisc}
+
+\usepackage{calc}				% Paket zum Berechnen von Längen z.B. 0.8\linewidth
+\usepackage{subcaption}			% hinzugefügt von mir, ermöglicht 2x2 Matrix mit Bildern
+
+\usepackage{xcolor} 			% einfache Verwendung von Farben in nahezu allen Farbmodellen
+
+\usepackage{listings}			% Darstellung von Quellcode mit den Umgebungen {lstlisting}, \lstinline und \lstinputlisting
+\lstset{literate=				% Damit können Umlaute innerhalb Listings geschrieben werden
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=t,                    % sets the caption-position to (b) bottom or (t) top
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	escapeinside={(*@}{@*)},
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=none,	                   	% "single" adds a frame around the code; "none"
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=[LaTeX]TeX,             % the language of the code
+	morekeywords={*,nomenclature},   % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\makeindex						% Indexverzeichnis erstellen
+\makenomenclature				% Abkürzungsverzeichnis erstellen
+%------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------------
+
+% To Access Codeimplementation: (26.04.2024)
+\definecolor{vscode-blue}{RGB}{0, 122, 204}
+\definecolor{vscode-darkblue}{RGB}{0, 60, 120}
+\definecolor{vscode-green}{RGB}{86, 156, 34}
+\definecolor{vscode-yellow}{RGB}{209, 154, 102}
+\definecolor{vscode-red}{RGB}{204, 24, 30}
+\definecolor{vscode-gray}{RGB}{128, 128, 128}
+\definecolor{vscode-darkgray}{RGB}{40, 42, 46}
+\definecolor{vscode-lightgray}{RGB}{197, 200, 198}
+\definecolor{vscode-darkgreen}{RGB}{35, 138, 115}
+\definecolor{vscode-orange}{RGB}{255, 121, 198}
+\definecolor{vscode-brown}{RGB}{139, 69, 19}
+\definecolor{vscode-purple}{RGB}{128, 0, 128}
+% S 26.04.2024
+% Definiere die Sprache Batch
+\lstdefinelanguage{batch}{
+	keywords={@echo, echo, pause, cd, start, timeout, rem, powershell, nul, python},
+	sensitive=false,
+	morecomment=[l]{rem\ },
+	morestring=[b]",
+}
+% Definiere die Sprache CMake
+\lstdefinelanguage{cmake}{
+	keywords={add_executable, add_library, add_subdirectory, add_test, cmake_minimum_required, configure_file, file, find_package, get_filename_component, include_directories, include, link_directories, list, message, project, set, target_compile_definitions, target_include_directories, target_link_libraries, target_sources, add_custom_target,add_custom_command, SET, find_program},
+	morekeywords=[2]{if, endif},
+	morekeywords=[3]{PATHS, DOC, NOT, FATAL_ERROR, OUTPUT, COMMAND, DEPENDS, NAME},
+	sensitive=true,
+	comment=[l]{\#},
+	morestring=[b]",
+}
+
+% Definiere den Code-Stil im VS Code-Stil
+\lstdefinestyle{CStyle}{
+	language=C,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{vscode-green},
+	keywordstyle=\color{vscode-blue},
+	numberstyle=\tiny\color{vscode-gray},
+	stringstyle=\color{vscode-orange},
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2,
+	frame=single,
+	rulecolor=\color{vscode-lightgray},
+	captionpos=b,
+	breaklines=true,
+	breakatwhitespace=false,
+	escapeinside={\%*}{*)},
+	numbers=left,
+	stepnumber=1,
+	numbersep=5pt,
+}
+\lstdefinestyle{CStyleSmall}{
+	language=C,
+	basicstyle=\ttfamily\scriptsize,
+	commentstyle=\color{vscode-green},
+	keywordstyle=\color{vscode-blue},
+	keywordstyle=[2]{\color{vscode-darkgreen}},
+	numberstyle=\tiny\color{vscode-gray},
+	stringstyle=\color{vscode-orange},
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2,
+	frame=single,
+	rulecolor=\color{vscode-lightgray},
+	captionpos=b,
+	breaklines=true,
+	breakatwhitespace=false,
+	escapeinside={\%*}{*)},
+	numbers=left,
+	stepnumber=1,
+	numbersep=5pt,
+	morekeywords=[2]{uint8,uint16,uint32,float32},
+}
+\lstdefinestyle{BatchStyle}{
+	language=batch,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{vscode-green},
+	keywordstyle=\color{vscode-blue},
+	numberstyle=\tiny\color{vscode-gray},
+	stringstyle=\color{vscode-brown},
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2,
+	frame=single,
+	rulecolor=\color{vscode-lightgray},
+	captionpos=b,
+	breaklines=true,
+	breakatwhitespace=false,
+	escapeinside={\%*}{*)},
+	numbers=left,
+	stepnumber=1,
+	numbersep=5pt,
+}
+\lstdefinestyle{PythonStyle}{
+	language=Python,                     % the language of the code
+	basicstyle=\ttfamily\scriptsize,     % the size and font of the code
+	backgroundcolor=\color{white},       % choose the background color
+	commentstyle=\color{vscode-green},   % comment style
+	keywordstyle=\color{vscode-blue},    % keyword style
+	numberstyle=\tiny\color{vscode-gray},  % the style for line numbers
+	stringstyle=\color{vscode-brown},    % string literal style
+	breaklines=true,                     % automatic line breaking only at whitespace
+	captionpos=b,                        % sets the caption-position to bottom
+	tabsize=2,                           % sets default tabsize to 2 spaces
+	frame=single,                        % adds a frame around the code
+	rulecolor=\color{black},             % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                    % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,              % underline spaces within strings only
+	showtabs=false,                      % show tabs within strings adding particular underscores
+	title=\lstname,                      % show the filename of files included with \lstinputlisting; also try caption instead of title
+	escapeinside={\%*}{*)},              % if you want to add LaTeX within your code
+	morekeywords={*,...},                 % if you want to add more keywords to the set
+	deletekeywords={...}                 % if you want to delete keywords from the given language
+}
+\lstdefinestyle{PythonStyleBig}{
+	language=Python,                     % the language of the code
+	basicstyle=\small\ttfamily,          % the size and font of the code
+	backgroundcolor=\color{white},       % choose the background color
+	commentstyle=\color{vscode-green},   % comment style
+	keywordstyle=\color{vscode-blue},    % keyword style
+	numberstyle=\tiny\color{vscode-gray},  % the style for line numbers
+	stringstyle=\color{vscode-brown},    % string literal style
+	breaklines=true,                     % automatic line breaking only at whitespace
+	captionpos=b,                        % sets the caption-position to bottom
+	tabsize=2,                           % sets default tabsize to 2 spaces
+	frame=single,                        % adds a frame around the code
+	rulecolor=\color{black},             % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                    % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,              % underline spaces within strings only
+	showtabs=false,                      % show tabs within strings adding particular underscores
+	title=\lstname,                      % show the filename of files included with \lstinputlisting; also try caption instead of title
+	escapeinside={\%*}{*)},              % if you want to add LaTeX within your code
+	morekeywords={*,...},                 % if you want to add more keywords to the set
+	deletekeywords={...}                 % if you want to delete keywords from the given language
+}
+\lstdefinestyle{CMakeStyle}{
+	language=CMake,
+	basicstyle=\ttfamily\scriptsize,
+	commentstyle=\color{vscode-green},
+	keywordstyle=\color{vscode-blue},
+	keywordstyle=[2]{\color{vscode-purple}},
+	keywordstyle=[3]{\color{vscode-darkblue}},
+	numberstyle=\tiny\color{vscode-gray},
+	stringstyle=\color{vscode-orange},
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2,
+	frame=single,
+	rulecolor=\color{vscode-lightgray},
+	captionpos=b,
+	breaklines=true,
+	breakatwhitespace=false,
+	escapeinside={\%*}{*)},
+	numbers=left,
+	stepnumber=1,
+	numbersep=5pt,
+}
+% Änderung der Bezeichnung für Listings
+\renewcommand{\lstlistingname}{Aufzählung} % 19.06.2024
+\renewcommand{\lstlistlistingname}{Aufzählungen} % 19.06.2024
+%------------------------------------------------------------------------------------ 
+%------------------------------------------------------------------------------------ 
+% Zum Aktualisieren des Abkürzungsverzeichnisses (Nomenklatur) bitte auf der Kommandozeile folgenden Befehl aufrufen : im Terminal
+% makeindex <Dateiname>.nlo -s nomencl.ist -o <Dateiname>.nls
+%%%%%%%%%% hier: 
+% für Simon
+% cd C:\Users\schaeffs\OneDrive - Webasto Group\Dokumente\02_Theoriephasen_an_der_DHBW\05_Semester\01_Studienarbeit_T3_3100\T3_3100\latex_doku_master
+%
+% makeindex WissBer_PA_SA_BA.nlo -s nomencl.ist -o WissBer_PA_SA_BA.nls
+%%%%%%%%%%
+% Oder besser: Kann in TexStudio unter Tools-Benutzer als Shortlink angelegt werden
+% Konfiguration unter: Optionen-Erzeugen-Benutzerbefehle: makeindex -s nomencl.ist -t %.nlg -o %.nls %.nlo
+% -----------------------------------------------------------------------------------------------------------------
+
+% Hier die persönlichen Daten eingeben:
+
+\newcommand{\titel}{Entwicklung eines TIA-Projektes}
+\newcommand{\untertitel}{}
+\newcommand{\arbeit}{Hausarbeit Industrielle Bussysteme}
+\newcommand{\studiengang}{Elektrotechnik}
+\newcommand{\studienrichtung}{Automation}
+\newcommand{\studienschwerpunkt}{}
+\newcommand{\autorone}{Simon Schäffler}
+\newcommand{\autortwo}{Alexander Drexl}
+\newcommand{\autorthree}{Florian Prumbs}
+\newcommand{\matrikelnrone}{5710369}
+\newcommand{\matrikelnrtwo}{3982016}
+\newcommand{\matrikelnrthree}{1848162}
+\newcommand{\kurs}{FN -TEA22}
+\newcommand{\firma}{Webasto Roof \& Components SE}
+\newcommand{\abgabe}{\today}
+\newcommand{\betreuerdhbw}{Prof. Dr.-Ing Thorsten Kever}
+\newcommand{\betreuerfirma}{nobody}
+\newcommand{\jahr}{2024}% für Angabe im Copyright-Vermerk der Titelseite
+\newcommand{\city}{Friedrichshafen}
+
+% Folgende Zeilen definieren Abkürzungen, um Befehle schneller eingeben zu können
+\newcommand{\ua}{\mbox{u.\,a.\ }}
+\newcommand{\zB}{\mbox{z.\,B.\ }}
+\newcommand{\bs}{$\backslash$}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}	% Differentialzeichen
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}} % Differentialzeichen höherer Ableitung
+\newcommand*\jj{\mathop{}\!\mathrm{j}}	% Komplexe Zahl j
+
+% Folgende Zeilen weden benötigt, um Tikz und PGF-Plot-Grafiken einzubinden
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=newest,width=0.6\linewidth}
+\usepgfplotslibrary{smithchart}
+\usepackage{tikz}						% Tikz sollte nach Listings Pakete geladen werden.
+% \usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta, decorations.pathreplacing, shapes, positioning, patterns}
+\hyphenation{Schrift-ar-ten}
+
+
+% -------------------------------------------------------------------------------------------
+%                     Beginn des Dokumenteninhalts
+% -------------------------------------------------------------------------------------------
+\begin{document}
+\let\texteuro\euro						% Eingabe \texteuro, € oder \euro erzeugt gleiches Ergebnis
+\setcounter{secnumdepth}{3}				% Nummerierungstiefe fürs Inhaltsverzeichnis
+\setcounter{tocdepth}{3}
+\sffamily								% für die Titelei serifenlose Schrift verwenden
+
+% ------------------------------ Titelei -----------------------------------------------------
+
+\include{pages/titelseite} 				% erzeugt die Titelseite
+\pagenumbering{roman}					% kleine, römische Seitenzahlen für Titelei
+\include{pages/erklaerung} 				% Einbinden der eidestattlichen Erklärung
+%\include{chapter/abstract}   			% Einbinden des Abstracts
+
+%\tableofcontents						% Erzeugen des Inhalsverzeichnisses
+\cleardoublepage
+
+
+% --------------------------------------------------------------------------------------------
+%                    Inhalt der Bachelorarbeit
+%---------------------------------------------------------------------------------------------
+\pagenumbering{arabic}					% arabische Seitenzahlen für den Hauptteil
+
+\rmfamily
+
+%\include{chapter/einleitung}
+%\include{chapter/grundlagen}
+\include{chapter/konzeptentwurf}
+\include{chapter/umsetzung}
+%\include{chapter/verifikation}
+%\include{chapter/zusammenfassung}
+
+% ---- Literaturverzeichnis ----------
+\interlinepenalty 10000					% Verhindert einen Umbruch mitten in Literatureinträgen
+%\printbibliography						% Erstellen des Literaturverzeichnisses
+% -----Ausgabe aller Verzeichnisse ---
+\setlength{\parskip}{0.5\baselineskip}
+%%\renewcommand{\indexname}{Sachwortverzeichnis}	% Auskommentiert selber: kein Sachwortverzeichnis (1)
+%%\printindex										% Erzeugen des Indexverzeichnises (1)
+%%\addcontentsline{toc}{chapter}{\indexname}		% selber (1)
+\input{pages/abkuerzungen}				% Datei mit allgemeinen Abkürzungen laden
+\renewcommand{\nomname}{Verzeichnis verwendeter Formelzeichen und Abkürzungen}
+\setlength{\nomlabelwidth}{.20\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+%\printnomenclature						% Erzeugen des Abkürzungsverzeichnises, siehe auch Inhalt der Datei pages/abkuerzungen.tex
+\cleardoublepage
+%\renewcommand{\glossaryname}{Glossar}	% entkommentiert falls benötigt
+%\printglossaries						% entkommentiert falls benötigt
+%\cleardoublepage						% entkommentiert falls benötigt
+%\listoffigures 							% Erzeugen des Abbildungsverzeichnisses 
+%\cleardoublepage
+%\listoftables 							% Erzeugen des Tabellenverzeichnisses
+\cleardoublepage
+
+% -----Anhang ------------------------
+\appendix
+\clearpage
+%\pagenumbering{Roman}	% große, römische Seitenzahlen für Anhang, falls gewünscht
+%\include{chapter/anhang}
+%\include{chapter/anhang_vorlagen}		% Zeile auskommentieren bei finalem Dokument!
+\end{document}
