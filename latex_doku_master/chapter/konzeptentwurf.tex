@@ -7,24 +7,25 @@
 \subsection*{Initialzustand}
 \label{subsec:Initialzustand}
 
-Das System startet im Initialzustand und wechselt unmittelbar in den sogenannten Idle-Zustand. Im Idle-Zustand sind beide LEDs der Anzeige AC2398 ausgeschaltet. Von diesem Zustand aus kann es, abhängig von den detektierten Eingaben oder Ereignissen, zu verschiedenen Zustandsübergängen kommen. Wird der grüne Knopf betätigt, während kein RFID-Tag erkannt wird, speichert das System die aktuelle Systemzeit und verbleibt im Idle-Zustand, wie im Diagramm als "Save Time" markiert.
+Das System startet im Initialzustand und wechselt direkt in den sogenannten Idle-Zustand. Im Idle-Zustand sind beide LEDs der Anzeige AC2398 ausgeschaltet. In diesem Zustand kann das System je nach den erkannten Eingaben oder Ereignissen in andere Zustände wechseln. Wenn der grüne Knopf gedrückt wird und kein RFID-Tag erkannt wird, speichert das System die aktuelle Systemzeit und bleibt im Idle-Zustand. Dieser Vorgang wird im Diagramm als "Save Time" bezeichnet.
 
 \subsection*{Tag-Erkennung und Verarbeitung}
 \label{subsec:Tag-ErkennungundVerarbeitung}
 
-Wird ein NFC-Tag detektiert, wechselt das System in den Zustand "Tag Detected Handling". In diesem Zustand blinkt die grüne LED mit einer Frequenz von einer Sekunde, um die Erkennung des Tags anzuzeigen. In diesem Kontext gibt es zwei mögliche Handlungsoptionen:
+Wird ein NFC-Tag erkannt und liegt kein Fehlerzustand vor, wechselt das System in den Zustand "Tag Detected Handling". In diesem Zustand blinkt die grüne LED mit einer Frequenz von einer Sekunde, um anzuzeigen, dass ein Tag erkannt wurde. Es gibt zwei mögliche Aktionen, vorausgesetzt, es liegt kein Fehlerzustand vor:
 
-Write Tag Handling: Wird der grüne Knopf gedrückt, während das RFID-Tag erkannt wird, erfolgt der Übergang zum Zustand "Write Tag Handling". Hierbei wird die zuvor gesicherte Systemzeit auf das RFID-Tag geschrieben, und die grüne LED leuchtet dauerhaft, um den erfolgreichen Abschluss des Schreibvorgangs anzuzeigen. Sobald das RFID-Tag nicht mehr erkannt wird, kehrt das System in den Idle-Zustand zurück.
+Write Tag Handling: Wenn der grüne Knopf gedrückt wird, während das RFID-Tag erkannt wird und die Systemzeit vorhanden ist, wechselt das System in den Zustand "Write Tag Handling". In diesem Zustand wird die zuvor gespeicherte Systemzeit auf das RFID-Tag geschrieben. Die grüne LED leuchtet dauerhaft, um anzuzeigen, dass der Schreibvorgang erfolgreich abgeschlossen wurde. Sobald das RFID-Tag nicht mehr erkannt wird, kehrt das System in den Idle-Zustand zurück.
 
-Delete Tag Handling: Alternativ kann im "Tag Detected Handling"-Zustand der rote Knopf gedrückt werden, während das RFID-Tag erkannt wird. In diesem Fall erfolgt der Wechsel in den Zustand "Delete Tag Handling". In diesem Zustand werden die gespeicherten Daten des RFID-Tags gelöscht, und beide LEDs leuchten dauerhaft, solange das Tag erkannt wird. Auch hier kehrt das System in den Idle-Zustand zurück, sobald das RFID-Tag nicht mehr erkannt wird.
+Delete Tag Handling: Alternativ kann der rote Knopf gedrückt werden, während das RFID-Tag erkannt wird und kein Fehlerzustand vorliegt. In diesem Fall wechselt das System in den Zustand "Delete Tag Handling". Hier werden die gespeicherten Daten des RFID-Tags gelöscht, und beide LEDs leuchten dauerhaft, solange das Tag erkannt wird. Sobald das RFID-Tag nicht mehr erkannt wird, kehrt das System in den Idle-Zustand zurück.
 
 \subsection*{Fehlerbehandlung}
 \label{subsec:Fehlerbehandlung}
 
-Sollte im Verlauf des Prozesses ein Fehler auftreten, wechselt das System in den "Error State Handling"-Zustand. In diesem Zustand blinkt die rote LED mit einer Frequenz von einer Sekunde, während die grüne LED ausgeschaltet bleibt, um den Fehlerzustand zu signalisieren. Der Fehlerzustand bleibt bestehen, bis die Fehlerursache behoben ist. Anschließend erreicht das System den Finalzustand, woraufhin der gesamte Ablauf erneut beginnt.
+Wenn während des Prozesses ein Fehlerzustand auftritt, wechselt das System in den Zustand "Error State Handling". In diesem Zustand blinkt die rote LED mit einer Frequenz von einer Sekunde, während die grüne LED ausgeschaltet bleibt, um den Fehler anzuzeigen. Der Fehlerzustand bleibt bestehen, bis die Ursache des Fehlers behoben ist. Anschließend erreicht das System den Finalzustand und der gesamte Ablauf beginnt erneut.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=1.0\textwidth]{images/StateMachine.png}
+	\vspace{1cm}
 	\caption{State-Machine-Diagramm}
 	% [Abbildungsverzeichnis]{Bildunterschrift}
 	\label{fig:StateMachineDiagramm}
@@ -88,7 +89,6 @@ Erstellung eines Konzept (Planung) mit geeigneter (kompakter) Dokumentation \new
 \end{table}
 
 \clearpage
-
 
 % ------------------------------------------------------------------------------------
 %... Text Konzeptentwurf: Gegenüberstellung verschiedener Lösungsansätze und Lösungsgenerierung, etc.
