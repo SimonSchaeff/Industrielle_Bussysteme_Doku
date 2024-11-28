@@ -22,7 +22,6 @@ Delete Tag Handling: Alternativ kann im "Tag Detected Handling"-Zustand der rote
 \label{subsec:Fehlerbehandlung}
 
 Sollte im Verlauf des Prozesses ein Fehler auftreten, wechselt das System in den "Error State Handling"-Zustand. In diesem Zustand blinkt die rote LED mit einer Frequenz von einer Sekunde, während die grüne LED ausgeschaltet bleibt, um den Fehlerzustand zu signalisieren. Der Fehlerzustand bleibt bestehen, bis die Fehlerursache behoben ist. Anschließend erreicht das System den Finalzustand, woraufhin der gesamte Ablauf erneut beginnt.
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=1.0\textwidth]{images/StateMachine.png}
@@ -32,35 +31,30 @@ Sollte im Verlauf des Prozesses ein Fehler auftreten, wechselt das System in den
 \end{figure}
 
 \clearpage
-
-
-
-
 \begin{comment} % Aus Angabe:
 Erstellung eines Konzept (Planung) mit geeigneter (kompakter) Dokumentation \newline
 * Signalliste \\
 * Statemachine \\
 \end{comment}
-Text Text Text...
 \begin{table}[h!]
 	\centering
 	\renewcommand{\arraystretch}{1.0} % Verringert den Zeilenabstand
-	\small
+	\footnotesize
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		\textbf{Name} & \textbf{Datentyp} & \textbf{Adresse} & \textbf{Kommentar}\\ \hline
-		RED\_button\_released & Bool & \%I193.2 &  \\ \hline
-		Green\_button\_pressed & Bool & \%I193.3 &  \\ \hline
-		Red\_button\_LED\_ON & Bool & \%Q192.0 &  \\ \hline
-		Green\_button\_LED\_ON & Bool & \%Q192.1 &  \\ \hline
+		RED\_button\_released & Bool & \%I193.2 & 1 wenn roter Taster nicht gedrückt \\ \hline
+		Green\_button\_pressed & Bool & \%I193.3 & 1 wenn grüner Taster gedrückt \\ \hline
+		Red\_button\_LED\_ON & Bool & \%Q192.0 & wenn 1 dann rote LED vom Taster an \\ \hline
+		Green\_button\_LED\_ON & Bool & \%Q192.1 & wenn 1 grüne LED vom Taster an \\ \hline
 	\end{tabular}
-	\caption{Variablentabelle von AC2398}
+	\caption{Variablentabelle von AC2398 (Tasterblock)}
 	\label{tab:AC2398}
 \end{table}
 \begin{table}[h!]
 	\centering
 	\renewcommand{\arraystretch}{1.0} % Verringert den Zeilenabstand
-	\tiny
+	\footnotesize
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		\textbf{Name} & \textbf{Datentyp} & \textbf{Adresse} & \textbf{Kommentar} \\ \hline
@@ -86,10 +80,10 @@ Text Text Text...
 		Input\_Data.Mode & UInt & \%QW22 & \\ \hline
 		Input\_Data.TagMemAddr & UInt & \%QW24 & \\ \hline
 		Input\_Data.Length & UInt & \%QW26 & \\ \hline
-		Input\_Data.WrData & Array[0..31] of UInt & \%Q28.0 & \\ \hline
-		Input\_Data.RdData & Array[0..31] of UInt & \%Q60.0 & \\ \hline
+		Input\_Data.WrData & Array[0..31] of Byte & \%Q28.0 & \\ \hline
+		Input\_Data.RdData & Array[0..31] of Byte & \%Q60.0 & \\ \hline
 	\end{tabular}
-	\caption{Variablentabelle von DTI515}
+	\caption{Variablentabelle von DTI515 (NFC-Modul)}
 	\label{tab:DTI515}
 \end{table}
 
