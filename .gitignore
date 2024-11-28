@@ -60,3 +60,5 @@ latex_doku_master/**/*.nav
 latex_doku_master/**/*.snm
 latex_doku_master/**/*.bcf
 latex_doku_master/**/*.nls
+
+latex_doku_master/*.pdf
